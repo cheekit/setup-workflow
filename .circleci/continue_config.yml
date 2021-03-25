@@ -1,0 +1,31 @@
+version: 2.1
+
+parameters:
+  build-server:
+    type: boolean
+    default: false
+  build-client:
+    type: boolean
+    default: false
+
+jobs:
+  job-a:
+    docker: 
+      - image: circleci/node:latest
+    steps:
+      - run: echo "job-a"
+  job-b:
+    docker: 
+      - image: circleci/node:latest
+    steps:
+      - run: echo "job-b"
+
+workflows:
+  build-server:
+    when: << pipeline.parameters.build-server >>
+    jobs:
+      - job-a
+  build-client:
+    when: << pipeline.parameters.build-client >>
+    jobs:
+      - job-b
