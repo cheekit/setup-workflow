@@ -1,0 +1,14 @@
+ version: 2.1
+
+setup: true
+
+orbs:
+  path-filtering: circleci/path-filtering@dev:alpha
+
+workflows:
+  setup-workflow:
+    jobs:
+      - path-filtering/filter:
+          mapping: |
+            src/server/.* build-server true
+            src/client/.* build-client true
